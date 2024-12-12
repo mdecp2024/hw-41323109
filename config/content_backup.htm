@@ -57,13 +57,77 @@
 <p><span>2. 已知可以在網頁中利用 Brython 繪製方格與塗色, 如下連結, 請設法修改此一程式, 直接將程式存入個人的 Gist, 並利用黑色方塊圍出一個圓形區域.</span></p>
 <p><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/TbSQcgYpzdM" width="560"></iframe></p>
 <p><a href="https://mdecp2024.github.io/hw-41323109/content/Brython.html?src=https://gist.githubusercontent.com/41323109/6dd576297787e115306d3e001d316815/raw/27a6be670935d4a4d1421dc33d511f582c4a1e4b/hw2.py">w11_hw2 code</a></p>
-<p></p><h3>w12</h3>
+<p></p>
+<h3>w12</h3>
 <p><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">w12_hw</span></span></p>
 <p><span style="vertical-align: inherit;"><span style="vertical-align: inherit;"><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/ATLqUgQjKPY" width="560"></iframe></span></span></p>
 <p><a href="https://gist.githubusercontent.com/41323109/59b36990eef240c893f7802f33dd27ba/raw/379513dd549e53d86b612a55e6900f6efb8470cc/gistfile1.txt">w12_hw程式碼連結</a></p>
 <p>心得:這次迴圈練習以及列印數字1到10，讓我又更進一步的熟悉</p>
 <p>   程式如何運用，希望接下來能慢慢把還不太懂的地方學會。</p>
-<p></p><h1>HW 2</h1>
+<p></p>
+<h3>w13_hw</h3>
+<!-- 導入 brython 程式庫 -->
+<p>
+<script src="/static/brython.js"></script>
+<script src="/static/brython_stdlib.js"></script>
+</p>
+<!-- 啟動 Brython -->
+<p>
+<script>
+window.onload=function(){
+brython({debug:1, pythonpath:['./../cmsimde/static/','./../downloads/py/']});
+}
+</script>
+</p>
+<div id="brython_div1"></div>
+<div>  </div>
+<div></div>
+<div></div>
+<div></div>
+<p>
+<script type="text/python3">
+from browser import html
+from browser import document as doc
+# 利用 html 建立 canvas 超文件物件
+canvas = html.CANVAS(width=600, height=600)
+brython_div = doc["brython_div1"]
+brython_div <= canvas
+ctx = canvas.getContext("2d")
+
+# 1. 繪製兩個矩形 (紅色邊框)
+ctx.strokeStyle = 'red'  # 設定矩形的邊框顏色為紅色
+ctx.beginPath()
+ctx.rect(100, 100, 200, 200)  # 第一個正方形的左上角在(100, 100)，邊長200
+ctx.rect(200, 200, 200, 200)  # 第二個正方形的左上角在(200, 200)，邊長200
+ctx.stroke()
+
+# 2. 繪製對角線 (藍色) - 只連接第一個矩形的左上角和第一個矩形的右下角
+ctx.strokeStyle = 'blue'  # 設定對角線顏色為藍色
+ctx.beginPath()
+ctx.moveTo(100, 100)  # 起點為第一個矩形的左上角 (100, 100)
+ctx.lineTo(300, 300)  # 終點為第一個矩形的右下角 (300, 300)
+ctx.stroke()
+
+# 3. 繪製兩個外切圓 (黑色)
+ctx.strokeStyle = 'black'  # 設定圓的顏色為黑色
+
+# 第一個矩形的外切圓
+ctx.beginPath()
+ctx.arc(200, 200, 141.4, 0, 2 * 3.14)  # 圓心在(110, 110)，半徑為141.4（sqrt(2) * 邊長的一半）
+ctx.stroke()
+
+# 第二個矩形的外切圓
+ctx.beginPath()
+ctx.arc(300, 300, 141.4, 0, 2 * 3.14)  # 圓心在(210, 210)，半徑為141.4
+ctx.stroke()
+ctx.lineWidth = 1
+ctx.strokeStyle = 'blue'  
+ctx.beginPath()
+ctx.moveTo(100, 100)
+ctx.lineTo(210, 210)
+ctx.stroke()
+</script>
+</p><h1>HW 2</h1>
 <p></p>
 <h2>HW 2 Exam</h2>
 <p>每六人為一組進行協同程式練習</p>
