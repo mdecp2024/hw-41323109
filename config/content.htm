@@ -63,8 +63,68 @@
 <p><a href="https://gist.githubusercontent.com/41323109/59b36990eef240c893f7802f33dd27ba/raw/379513dd549e53d86b612a55e6900f6efb8470cc/gistfile1.txt">w12_hw程式碼連結</a></p>
 <p>心得:這次迴圈練習以及列印數字1到10，讓我又更進一步的熟悉</p>
 <p>   程式如何運用，希望接下來能慢慢把還不太懂的地方學會。</p>
-<p></p><h3>w13_hw</h3>
-<!-- 導入 brython 程式庫 -->
+<p></p>
+<p>
+<script type="text/python3">
+from browser import html
+from browser import document as doc
+# 建立 canvas
+canvas = html.CANVAS(width=600, height=600)
+brython_div = doc["brython_div1"]
+brython_div <= canvas
+ctx = canvas.getContext("2d")
+
+# 填充第一個矩形 (紅色背景，透明度 0.4)
+ctx.fillStyle = 'rgba(255, 0, 0, 0.4)'  # 紅色背景
+ctx.beginPath()
+ctx.rect(100, 100, 200, 200)
+ctx.fill()
+ctx.strokeStyle = 'red'
+ctx.stroke()
+
+# 填充第二個矩形 (綠色背景，透明度 0.4)
+ctx.fillStyle = 'rgba(0, 255, 0, 0.4)'  # 綠色背景
+ctx.beginPath()
+ctx.rect(200, 200, 200, 200)
+ctx.fill()
+ctx.strokeStyle = 'red'
+ctx.stroke()
+
+# 第一個圓的區域填充 (藍色背景，透明度 0.2)
+ctx.fillStyle = 'rgba(0, 0, 255, 0.2)'  # 藍色背景
+ctx.beginPath()
+ctx.arc(200, 200, 141.4, 0, 2 * 3.14)  # 第一個圓
+ctx.fill()
+ctx.strokeStyle = 'black'
+ctx.stroke()
+
+# 第二個圓的區域填充 (黃色背景，透明度 0.2)
+ctx.fillStyle = 'rgba(255, 255, 0, 0.2)'  # 黃色背景
+ctx.beginPath()
+ctx.arc(300, 300, 141.4, 0, 2 * 3.14)  # 第二個圓
+ctx.fill()
+ctx.strokeStyle = 'black'
+ctx.stroke()
+
+# 繪製藍色對角線 (保持在線條最上層)
+ctx.strokeStyle = 'blue'
+ctx.lineWidth = 2
+ctx.beginPath()
+ctx.moveTo(100, 100)
+ctx.lineTo(300, 300)
+ctx.stroke()
+
+# 額外藍色連接線條
+ctx.strokeStyle = 'blue'
+ctx.lineWidth = 2
+ctx.beginPath()
+ctx.moveTo(100, 100)
+ctx.lineTo(210, 210)
+ctx.stroke()
+</script>
+</p>
+<h3>w13_hw</h3>
+<!-- 導入 Brython 程式庫 -->
 <p>
 <script src="/static/brython.js"></script>
 <script src="/static/brython_stdlib.js"></script>
@@ -86,47 +146,62 @@ brython({debug:1, pythonpath:['./../cmsimde/static/','./../downloads/py/']});
 <script type="text/python3">
 from browser import html
 from browser import document as doc
-# 利用 html 建立 canvas 超文件物件
+
+# 建立 canvas
 canvas = html.CANVAS(width=600, height=600)
 brython_div = doc["brython_div1"]
 brython_div <= canvas
 ctx = canvas.getContext("2d")
 
-# 1. 繪製兩個矩形 (紅色邊框)
-ctx.strokeStyle = 'red'  # 設定矩形的邊框顏色為紅色
+# 1. 填充第一個矩形內部顏色 (淺紅色) 並畫紅色邊框
+ctx.fillStyle = 'rgba(255, 100, 100, 0.4)'  # 淺紅色
 ctx.beginPath()
-ctx.rect(100, 100, 200, 200)  # 第一個正方形的左上角在(100, 100)，邊長200
-ctx.rect(200, 200, 200, 200)  # 第二個正方形的左上角在(200, 200)，邊長200
+ctx.rect(100, 100, 200, 200)
+ctx.fill()
+ctx.strokeStyle = 'red'
 ctx.stroke()
 
-# 2. 繪製對角線 (藍色) - 只連接第一個矩形的左上角和第一個矩形的右下角
-ctx.strokeStyle = 'blue'  # 設定對角線顏色為藍色
+# 2. 填充第二個矩形內部顏色 (淺綠色) 並畫紅色邊框
+ctx.fillStyle = 'rgba(100, 255, 100, 0.4)'  # 淺綠色
 ctx.beginPath()
-ctx.moveTo(100, 100)  # 起點為第一個矩形的左上角 (100, 100)
-ctx.lineTo(300, 300)  # 終點為第一個矩形的右下角 (300, 300)
+ctx.rect(200, 200, 200, 200)
+ctx.fill()
+ctx.strokeStyle = 'red'
 ctx.stroke()
 
-# 3. 繪製兩個外切圓 (黑色)
-ctx.strokeStyle = 'black'  # 設定圓的顏色為黑色
-
-# 第一個矩形的外切圓
+# 3. 繪製第一個矩形的藍色對角線
+ctx.strokeStyle = 'blue'
+ctx.lineWidth = 2
 ctx.beginPath()
-ctx.arc(200, 200, 141.4, 0, 2 * 3.14)  # 圓心在(110, 110)，半徑為141.4（sqrt(2) * 邊長的一半）
+ctx.moveTo(100, 100)  # 左上角
+ctx.lineTo(300, 300)  # 右下角
 ctx.stroke()
 
-# 第二個矩形的外切圓
+# 4. 填充第一個圓形 (淺藍色) 並畫黑色外切圓
+ctx.fillStyle = 'rgba(100, 100, 255, 0.2)'  # 淺藍色
 ctx.beginPath()
-ctx.arc(300, 300, 141.4, 0, 2 * 3.14)  # 圓心在(210, 210)，半徑為141.4
+ctx.arc(200, 200, 141.4, 0, 2 * 3.14)  # 圓心 (200, 200)，半徑 141.4
+ctx.fill()
+ctx.strokeStyle = 'black'
 ctx.stroke()
-ctx.lineWidth = 1
-ctx.strokeStyle = 'blue'  
+
+# 5. 填充第二個圓形 (淺黃色) 並畫黑色外切圓
+ctx.fillStyle = 'rgba(255, 255, 100, 0.2)'  # 淺黃色
 ctx.beginPath()
-ctx.moveTo(100, 100)
-ctx.lineTo(210, 210)
+ctx.arc(300, 300, 141.4, 0, 2 * 3.14)  # 圓心 (300, 300)，半徑 141.4
+ctx.fill()
+ctx.strokeStyle = 'black'
+ctx.stroke()
+
+# 6. 額外藍色連接線條
+ctx.strokeStyle = 'blue'
+ctx.lineWidth = 2
+ctx.beginPath()
+ctx.moveTo(100, 100)  # 第一個矩形左上角
+ctx.lineTo(210, 210)  # 第二個矩形內部某點
 ctx.stroke()
 </script>
-</p>
-<h3>w14_hw</h3>
+</p><h3>w14_hw</h3>
 <h1>HW 2</h1>
 <p></p>
 <h2>HW 2 Exam</h2>
